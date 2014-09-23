@@ -68,7 +68,9 @@ func TestButton(t *testing.T) {
 	cs.OnResize = func(cs *Controlset) {
 		disp.Attach(draw9.Refnone)
 
+		/* TODO: bug */
 		*cs.screen = *disp.ScreenImage
+
 		cs.Ctl("row size")
 		r := disp.ScreenImage.R
 		cs.Ctl(fmt.Sprintf("row rect %d %d %d %d", r.Min.X, r.Min.Y, r.Max.X, r.Max.Y))
@@ -77,7 +79,6 @@ func TestButton(t *testing.T) {
 		disp.Flush()
 	}
 
-	//cs.Ctl("row show")
 	cs.Resize()
 
 	evt := make(chan string, 1)
@@ -85,7 +86,6 @@ func TestButton(t *testing.T) {
 	d.Wire(evt)
 
 	for ev := range evt {
-
 		t.Logf("evt: %s", ev)
 		f := strings.Fields(ev)
 		if strings.Contains(f[2], "4") {
