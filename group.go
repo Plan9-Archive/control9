@@ -119,13 +119,13 @@ func (g *Group) Mouse(ms draw9.Mouse) {
 	/* TODO CtlStack */
 	lastkid := -1
 	for i, k := range g.kids {
-		if ((ms.Buttons == 0 || g.lastbut == 0) && ms.Pt().In(k.Rect())) || ((ms.Buttons != 0 || g.lastbut != 0) && g.lastkid == i) {
+		if ((!ms.Any() || g.lastbut == 0) && ms.Pt().In(k.Rect())) || ((ms.Any() || g.lastbut != 0) && g.lastkid == i) {
 			k.Mouse(ms)
 			lastkid = i
 		}
 	}
 	g.lastkid = lastkid
-	g.lastbut = ms.Buttons
+	g.lastbut = ms.Buttons()
 }
 
 func (g *Group) Key(r rune) {}

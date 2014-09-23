@@ -51,7 +51,7 @@ func (b *Button) Ctl(e string) {
 }
 func (b *Button) Mouse(m draw9.Mouse) {
 	log.Printf("%s mouse %s", b.name, m)
-	if m.Buttons&7 > 0 {
+	if m.Any() {
 		/* some button is down */
 		if m.Pt().In(b.rect) {
 			b.off = 0
@@ -63,14 +63,14 @@ func (b *Button) Mouse(m draw9.Mouse) {
 			}
 		}
 	}
-	if m.Buttons&7 != b.lastbut {
+	if m.Buttons() & 7 != b.lastbut {
 		/* button change */
-		if m.Buttons&7 > 0 {
+		if m.Buttons() & 7 > 0 {
 			b.prepress = b.pressed
 			if b.pressed > 0 {
 				b.pressed = 0
 			} else {
-				b.pressed = m.Buttons & 7
+				b.pressed = m.Buttons() & 7
 			}
 			b.show()
 		} else {
@@ -84,7 +84,7 @@ func (b *Button) Mouse(m draw9.Mouse) {
 		}
 	}
 
-	b.lastbut = m.Buttons & 7
+	b.lastbut = m.Buttons() & 7
 }
 
 func (b *Button) Key(c rune) {}

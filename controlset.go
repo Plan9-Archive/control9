@@ -142,7 +142,7 @@ func (cs *Controlset) cs() {
 			if cs.clicktotype {
 				goto Change
 			}
-			if ms.Buttons == 0 {
+			if !ms.Any() {
 				goto Send
 			}
 		Change:
@@ -164,7 +164,7 @@ func (cs *Controlset) cs() {
 			if cs.focus != nil {
 				cs.focus.Mouse(ms)
 			}
-			prevbut = ms.Buttons
+			prevbut = ms.Buttons()
 		case s := <-cs.ctl:
 			cs.onctl(s)
 		case <-cs.csexitc:
