@@ -1,4 +1,4 @@
-package control
+package control9
 
 import (
 	"bitbucket.org/mischief/draw9"

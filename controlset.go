@@ -1,4 +1,4 @@
-package control
+package control9
 
 import (
 	"bitbucket.org/mischief/draw9"
@@ -173,3 +173,8 @@ func (cs *Controlset) cs() {
 		}
 	}
 }
+
+func (cs *Controlset) Screen(sc *draw9.Image){
+	*cs.screen = *sc
+}
+
